@@ -1,0 +1,122 @@
+# =====================================================================
+# GA single-island pipeline with an auto-scaling fitness-function POOL
+# =====================================================================
+# Services:
+#   fitness-pool : the baseline fitness worker (the pool's first member).
+#                  The scaler adds MORE identical workers at runtime, all
+#                  sharing the DNS alias "fitness-pool" so requests are
+#                  round-robined across the whole pool automatically.
+#   ga-service   : the single-island GA driver (runs once, then exits).
+#   scaler       : watches the fitness improvement rate and scales the pool.
+#   cadvisor     : per-container CPU / RAM / network monitoring.
+# ---------------------------------------------------------------------
+
+services:
+  # ---- Fitness pool baseline worker --------------------------------
+  fitness-pool:
+    build: ./fitness-service
+    image: ga-fitness-pool-fitness:latest   # fixed name so the scaler can reuse it
+    environment:
+      EVAL_DELAY_MS: ${EVAL_DELAY_MS}
+    networks:
+      ga-net:
+        aliases:
+          - fitness-pool          # the DNS name the GA + scaler workers share
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8001/health"]
+      interval: 5s
+      timeout: 3s
+      retries: 5
+    # NOTE: no host port mapping — workers are reached over the internal
+    # network via the "fitness-pool" DNS name. This lets the pool scale to
+    # many replicas without host-port collisions (Bind for 0.0.0.0:8001 …).
+
+  # ---- Single-island GA pipeline -----------------------------------
+  ga-service:
+    build: ./ga-service
+    depends_on:
+      fitness-pool:
+        condition: service_healthy
+    environment:
+      # problem
+      PUZZLE: ${PUZZLE}
+      MAX_GENERATIONS: ${MAX_GENERATIONS}
+      # GA hyperparameters
+      POP_SIZE: ${POP_SIZE}
+      MUTATION_RATE: ${MUTATION_RATE}
+      CROSSOVER_RATE: ${CROSSOVER_RATE}
+      TOURNAMENT_K: ${TOURNAMENT_K}
+      ELITE_COUNT: ${ELITE_COUNT}
+      SEED: ${SEED}
+      HYPERMUTATION_FACTOR: ${HYPERMUTATION_FACTOR}
+      STAGNATION_FOR_HYPERMUT: ${STAGNATION_FOR_HYPERMUT}
+      STAGNATION_FOR_RESTART: ${STAGNATION_FOR_RESTART}
+      # rate tracking
+      RATE_WINDOW: ${RATE_WINDOW}
+      STAGNATION_THRESHOLD: ${STAGNATION_THRESHOLD}
+      # pool client
+      FITNESS_URL: "http://fitness-pool:8001"
+      EVAL_CONCURRENCY: ${EVAL_CONCURRENCY}
+      # io
+      STATUS_PATH: "/results/status.json"
+      RESULT_PATH: "/results/result.json"
+      PUZZLE_PATH: "/results/puzzle.json"
+    volumes:
+      - ./results:/results
+    networks:
+      - ga-net
+
+  # ---- Autoscaler --------------------------------------------------
+  scaler:
+    build: ./scaler
+    depends_on:
+      fitness-pool:
+        condition: service_healthy
+    environment:
+      STATUS_PATH: "/results/status.json"
+      NETWORK_NAME: "ga-net"
+      FITNESS_IMAGE: "ga-fitness-pool-fitness:latest"
+      POOL_ALIAS: "fitness-pool"
+      MIN_WORKERS: ${MIN_WORKERS}
+      MAX_WORKERS: ${MAX_WORKERS}
+      STAGNATION_RATE: ${STAGNATION_THRESHOLD}
+      SLOW_GEN_MS: ${SLOW_GEN_MS}
+      HEALTHY_RATE: ${HEALTHY_RATE}
+      POLL_INTERVAL: "3"
+      # passed through to any worker it launches (keeps target identical)
+      EVAL_DELAY_MS: ${EVAL_DELAY_MS}
+    volumes:
+      - ./results:/results
+      - /var/run/docker.sock:/var/run/docker.sock   # lets it manage workers
+    networks:
+      - ga-net
+
+  # ---- Live Sudoku dashboard ----------------------------------------
+  dashboard:
+    build: ./dashboard
+    environment:
+      RESULTS_DIR: "/results"
+    volumes:
+      - ./results:/results:ro
+    ports:
+      - "8050:8050"
+    networks:
+      - ga-net
+
+  # ---- Monitoring --------------------------------------------------
+  cadvisor:
+    image: gcr.io/cadvisor/cadvisor:v0.47.2
+    ports:
+      - "8080:8080"
+    volumes:
+      - /:/rootfs:ro
+      - /var/run:/var/run:ro
+      - /sys:/sys:ro
+      - /var/lib/docker/:/var/lib/docker:ro
+    networks:
+      - ga-net
+
+# A NAMED network so the scaler can attach new workers to it by name.
+networks:
+  ga-net:
+    name: ga-net
