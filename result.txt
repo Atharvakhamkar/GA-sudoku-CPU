@@ -1,0 +1,254 @@
+azureuser@GA:~/GA-sudoku-CPU$ ./scripts/run_experiment.sh "1 2 3 4 5 6"
+=== Building images ===
+WARN[0000] Docker Compose is configured to build using Bake, but buildx isn't installed 
+[+] Building 2/2
+ ✔ fitness-pool  Built0.0s 
+ ✔ ga-service    Built0.0s 
+  fitness image: ga-fitness-pool-fitness:latest
+  ga image:      ga-sudoku-cpu-ga-service:latest
+ddd6489e2c1fbc17516170e86e6d24b052f5e7af9f982fad5ea748cc5f26156f
+
+==========================================
+  RUN: 1 fitness worker(s)
+==========================================
+  started 1 worker container(s); waiting for health...
+  >>> workers actually running: 1  (should be 1)
+[ga] puzzle = classic (30 givens)
+5 3 . | . 7 . | . . .
+6 . . | 1 9 5 | . . .
+. 9 8 | . . . | . 6 .
+---------------------
+8 . . | . 6 . | . . 3
+4 . . | 8 . 3 | . . 1
+7 . . | . 2 . | . . 6
+---------------------
+. 6 . | . . . | 2 8 .
+. . . | 4 1 9 | . . 5
+. . . | . 8 . | . 7 9
+[ga] config: {"CROSSOVER_RATE": 0.85, "ELITE_COUNT": 6, "HYPERMUTATION_FACTOR": 10, "MAX_GENERATIONS": 120, "MUTATION_RATE": 0.25, "POP_SIZE": 400, "PUZZLE": "classic", "PUZZLE_PATH": "/results/puzzle.json", "RATE_WINDOW": 5, "RESULT_PATH": "/results/result.json", "SEED": 7, "STAGNATION_FOR_HYPERMUT": 25, "STAGNATION_FOR_RESTART": 80, "STAGNATION_THRESHOLD": 0.2, "STATUS_PATH": "/results/status.json", "TOURNAMENT_K": 5}
+[ga] COMPACT chromosome length = 51 (full grid would be 81)
+[ga] waiting for fitness pool...
+[ga] fitness pool is up.
+[ga] gen    1 | best 130/162 (80.25%) | rate None | 1 worker(s) | 6201ms | restarts 0
+[ga] gen   10 | best 146/162 (90.12%) | rate 1.6 | 1 worker(s) | 6236ms | restarts 0
+[ga] gen   20 | best 153/162 (94.44%) | rate 0.0 | 1 worker(s) | 6130ms | restarts 0
+[ga] gen   30 | best 155/162 (95.68%) | rate 0.0 | 1 worker(s) | 6095ms | restarts 0
+[ga] gen   40 | best 155/162 (95.68%) | rate 0.0 | 1 worker(s) | 6115ms | restarts 0
+[ga] gen   50 | best 156/162 (96.3%) | rate 0.0 | 1 worker(s) | 6085ms | restarts 0
+[ga] gen   60 | best 156/162 (96.3%) | rate 0.0 | 1 worker(s) | 6172ms | restarts 0
+[ga] gen   70 | best 156/162 (96.3%) | rate 0.0 | 1 worker(s) | 6417ms | restarts 0
+[ga] gen   80 | best 156/162 (96.3%) | rate 0.0 | 1 worker(s) | 6585ms | restarts 0
+[ga] gen   90 | best 156/162 (96.3%) | rate 0.0 | 1 worker(s) | 6210ms | restarts 0
+[ga] gen  100 | best 156/162 (96.3%) | rate 0.0 | 1 worker(s) | 6393ms | restarts 0
+[ga] gen  110 | best 156/162 (96.3%) | rate 0.0 | 1 worker(s) | 6115ms | restarts 0
+[ga] gen  120 | best 156/162 (96.3%) | rate 0.0 | 1 worker(s) | 6165ms | restarts 0
+[ga] DONE. best 156/162 (96.3%) in 744.9s -> /results/result.json
+  saved -> results/result_workers_1.json
+
+==========================================
+  RUN: 2 fitness worker(s)
+==========================================
+  started 2 worker container(s); waiting for health...
+  >>> workers actually running: 2  (should be 2)
+[ga] puzzle = classic (30 givens)
+5 3 . | . 7 . | . . .
+6 . . | 1 9 5 | . . .
+. 9 8 | . . . | . 6 .
+---------------------
+8 . . | . 6 . | . . 3
+4 . . | 8 . 3 | . . 1
+7 . . | . 2 . | . . 6
+---------------------
+. 6 . | . . . | 2 8 .
+. . . | 4 1 9 | . . 5
+. . . | . 8 . | . 7 9
+[ga] config: {"CROSSOVER_RATE": 0.85, "ELITE_COUNT": 6, "HYPERMUTATION_FACTOR": 10, "MAX_GENERATIONS": 120, "MUTATION_RATE": 0.25, "POP_SIZE": 400, "PUZZLE": "classic", "PUZZLE_PATH": "/results/puzzle.json", "RATE_WINDOW": 5, "RESULT_PATH": "/results/result.json", "SEED": 7, "STAGNATION_FOR_HYPERMUT": 25, "STAGNATION_FOR_RESTART": 80, "STAGNATION_THRESHOLD": 0.2, "STATUS_PATH": "/results/status.json", "TOURNAMENT_K": 5}
+[ga] COMPACT chromosome length = 51 (full grid would be 81)
+[ga] waiting for fitness pool...
+[ga] fitness pool is up.
+[ga] gen    1 | best 130/162 (80.25%) | rate None | 2 worker(s) | 3616ms | restarts 0
+[ga] gen   10 | best 146/162 (90.12%) | rate 1.6 | 2 worker(s) | 5114ms | restarts 0
+[ga] gen   20 | best 153/162 (94.44%) | rate 0.0 | 2 worker(s) | 4579ms | restarts 0
+[ga] gen   30 | best 155/162 (95.68%) | rate 0.0 | 2 worker(s) | 4041ms | restarts 0
+[ga] gen   40 | best 155/162 (95.68%) | rate 0.0 | 2 worker(s) | 4042ms | restarts 0
+[ga] gen   50 | best 156/162 (96.3%) | rate 0.0 | 2 worker(s) | 5128ms | restarts 0
+[ga] gen   60 | best 156/162 (96.3%) | rate 0.0 | 2 worker(s) | 5126ms | restarts 0
+[ga] gen   70 | best 156/162 (96.3%) | rate 0.0 | 2 worker(s) | 4597ms | restarts 0
+[ga] gen   80 | best 156/162 (96.3%) | rate 0.0 | 2 worker(s) | 5137ms | restarts 0
+[ga] gen   90 | best 156/162 (96.3%) | rate 0.0 | 2 worker(s) | 5131ms | restarts 0
+[ga] gen  100 | best 156/162 (96.3%) | rate 0.0 | 2 worker(s) | 4580ms | restarts 0
+[ga] gen  110 | best 156/162 (96.3%) | rate 0.0 | 2 worker(s) | 5134ms | restarts 0
+[ga] gen  120 | best 156/162 (96.3%) | rate 0.0 | 2 worker(s) | 5128ms | restarts 0
+[ga] DONE. best 156/162 (96.3%) in 564.8s -> /results/result.json
+  saved -> results/result_workers_2.json
+
+==========================================
+  RUN: 3 fitness worker(s)
+==========================================
+  started 3 worker container(s); waiting for health...
+  >>> workers actually running: 3  (should be 3)
+[ga] puzzle = classic (30 givens)
+5 3 . | . 7 . | . . .
+6 . . | 1 9 5 | . . .
+. 9 8 | . . . | . 6 .
+---------------------
+8 . . | . 6 . | . . 3
+4 . . | 8 . 3 | . . 1
+7 . . | . 2 . | . . 6
+---------------------
+. 6 . | . . . | 2 8 .
+. . . | 4 1 9 | . . 5
+. . . | . 8 . | . 7 9
+[ga] config: {"CROSSOVER_RATE": 0.85, "ELITE_COUNT": 6, "HYPERMUTATION_FACTOR": 10, "MAX_GENERATIONS": 120, "MUTATION_RATE": 0.25, "POP_SIZE": 400, "PUZZLE": "classic", "PUZZLE_PATH": "/results/puzzle.json", "RATE_WINDOW": 5, "RESULT_PATH": "/results/result.json", "SEED": 7, "STAGNATION_FOR_HYPERMUT": 25, "STAGNATION_FOR_RESTART": 80, "STAGNATION_THRESHOLD": 0.2, "STATUS_PATH": "/results/status.json", "TOURNAMENT_K": 5}
+[ga] COMPACT chromosome length = 51 (full grid would be 81)
+[ga] waiting for fitness pool...
+[ga] fitness pool is up.
+[ga] gen    1 | best 130/162 (80.25%) | rate None | 2 worker(s) | 5131ms | restarts 0
+[ga] gen   10 | best 146/162 (90.12%) | rate 1.6 | 3 worker(s) | 3995ms | restarts 0
+[ga] gen   20 | best 153/162 (94.44%) | rate 0.0 | 3 worker(s) | 5105ms | restarts 0
+[ga] gen   30 | best 155/162 (95.68%) | rate 0.0 | 3 worker(s) | 3539ms | restarts 0
+[ga] gen   40 | best 155/162 (95.68%) | rate 0.0 | 3 worker(s) | 4584ms | restarts 0
+[ga] gen   50 | best 156/162 (96.3%) | rate 0.0 | 3 worker(s) | 3533ms | restarts 0
+[ga] gen   60 | best 156/162 (96.3%) | rate 0.0 | 2 worker(s) | 5098ms | restarts 0
+[ga] gen   70 | best 156/162 (96.3%) | rate 0.0 | 3 worker(s) | 4010ms | restarts 0
+[ga] gen   80 | best 156/162 (96.3%) | rate 0.0 | 3 worker(s) | 3591ms | restarts 0
+[ga] gen   90 | best 156/162 (96.3%) | rate 0.0 | 2 worker(s) | 3081ms | restarts 0
+[ga] gen  100 | best 156/162 (96.3%) | rate 0.0 | 3 worker(s) | 4023ms | restarts 0
+[ga] gen  110 | best 156/162 (96.3%) | rate 0.0 | 3 worker(s) | 4032ms | restarts 0
+[ga] gen  120 | best 156/162 (96.3%) | rate 0.0 | 3 worker(s) | 4011ms | restarts 0
+[ga] DONE. best 156/162 (96.3%) in 496.5s -> /results/result.json
+  saved -> results/result_workers_3.json
+
+==========================================
+  RUN: 4 fitness worker(s)
+==========================================
+  started 4 worker container(s); waiting for health...
+  >>> workers actually running: 4  (should be 4)
+[ga] puzzle = classic (30 givens)
+5 3 . | . 7 . | . . .
+6 . . | 1 9 5 | . . .
+. 9 8 | . . . | . 6 .
+---------------------
+8 . . | . 6 . | . . 3
+4 . . | 8 . 3 | . . 1
+7 . . | . 2 . | . . 6
+---------------------
+. 6 . | . . . | 2 8 .
+. . . | 4 1 9 | . . 5
+. . . | . 8 . | . 7 9
+[ga] config: {"CROSSOVER_RATE": 0.85, "ELITE_COUNT": 6, "HYPERMUTATION_FACTOR": 10, "MAX_GENERATIONS": 120, "MUTATION_RATE": 0.25, "POP_SIZE": 400, "PUZZLE": "classic", "PUZZLE_PATH": "/results/puzzle.json", "RATE_WINDOW": 5, "RESULT_PATH": "/results/result.json", "SEED": 7, "STAGNATION_FOR_HYPERMUT": 25, "STAGNATION_FOR_RESTART": 80, "STAGNATION_THRESHOLD": 0.2, "STATUS_PATH": "/results/status.json", "TOURNAMENT_K": 5}
+[ga] COMPACT chromosome length = 51 (full grid would be 81)
+[ga] waiting for fitness pool...
+[ga] fitness pool is up.
+[ga] gen    1 | best 130/162 (80.25%) | rate None | 3 worker(s) | 3871ms | restarts 0
+[ga] gen   10 | best 146/162 (90.12%) | rate 1.6 | 4 worker(s) | 3998ms | restarts 0
+[ga] gen   20 | best 153/162 (94.44%) | rate 0.0 | 3 worker(s) | 1719ms | restarts 0
+[ga] gen   30 | best 155/162 (95.68%) | rate 0.0 | 3 worker(s) | 3418ms | restarts 0
+[ga] gen   40 | best 155/162 (95.68%) | rate 0.0 | 2 worker(s) | 4161ms | restarts 0
+[ga] gen   50 | best 156/162 (96.3%) | rate 0.0 | 2 worker(s) | 2161ms | restarts 0
+[ga] gen   60 | best 156/162 (96.3%) | rate 0.0 | 3 worker(s) | 3081ms | restarts 0
+[ga] gen   70 | best 156/162 (96.3%) | rate 0.0 | 3 worker(s) | 4061ms | restarts 0
+[ga] gen   80 | best 156/162 (96.3%) | rate 0.0 | 3 worker(s) | 4087ms | restarts 0
+[ga] gen   90 | best 156/162 (96.3%) | rate 0.0 | 3 worker(s) | 1651ms | restarts 0
+[ga] gen  100 | best 156/162 (96.3%) | rate 0.0 | 3 worker(s) | 3066ms | restarts 0
+[ga] gen  110 | best 156/162 (96.3%) | rate 0.0 | 3 worker(s) | 4061ms | restarts 0
+[ga] gen  120 | best 156/162 (96.3%) | rate 0.0 | 4 worker(s) | 2533ms | restarts 0
+[ga] DONE. best 156/162 (96.3%) in 357.6s -> /results/result.json
+  saved -> results/result_workers_4.json
+
+==========================================
+  RUN: 5 fitness worker(s)
+==========================================
+  started 5 worker container(s); waiting for health...
+  >>> workers actually running: 5  (should be 5)
+[ga] puzzle = classic (30 givens)
+5 3 . | . 7 . | . . .
+6 . . | 1 9 5 | . . .
+. 9 8 | . . . | . 6 .
+---------------------
+8 . . | . 6 . | . . 3
+4 . . | 8 . 3 | . . 1
+7 . . | . 2 . | . . 6
+---------------------
+. 6 . | . . . | 2 8 .
+. . . | 4 1 9 | . . 5
+. . . | . 8 . | . 7 9
+[ga] config: {"CROSSOVER_RATE": 0.85, "ELITE_COUNT": 6, "HYPERMUTATION_FACTOR": 10, "MAX_GENERATIONS": 120, "MUTATION_RATE": 0.25, "POP_SIZE": 400, "PUZZLE": "classic", "PUZZLE_PATH": "/results/puzzle.json", "RATE_WINDOW": 5, "RESULT_PATH": "/results/result.json", "SEED": 7, "STAGNATION_FOR_HYPERMUT": 25, "STAGNATION_FOR_RESTART": 80, "STAGNATION_THRESHOLD": 0.2, "STATUS_PATH": "/results/status.json", "TOURNAMENT_K": 5}
+[ga] COMPACT chromosome length = 51 (full grid would be 81)
+[ga] waiting for fitness pool...
+[ga] fitness pool is up.
+[ga] gen    1 | best 130/162 (80.25%) | rate None | 3 worker(s) | 3932ms | restarts 0
+[ga] gen   10 | best 146/162 (90.12%) | rate 1.6 | 5 worker(s) | 3109ms | restarts 0
+[ga] gen   20 | best 153/162 (94.44%) | rate 0.0 | 3 worker(s) | 3827ms | restarts 0
+[ga] gen   30 | best 155/162 (95.68%) | rate 0.0 | 4 worker(s) | 2785ms | restarts 0
+[ga] gen   40 | best 155/162 (95.68%) | rate 0.0 | 4 worker(s) | 3296ms | restarts 0
+[ga] gen   50 | best 156/162 (96.3%) | rate 0.0 | 3 worker(s) | 3619ms | restarts 0
+[ga] gen   60 | best 156/162 (96.3%) | rate 0.0 | 5 worker(s) | 2639ms | restarts 0
+[ga] gen   70 | best 156/162 (96.3%) | rate 0.0 | 5 worker(s) | 2465ms | restarts 0
+[ga] gen   80 | best 156/162 (96.3%) | rate 0.0 | 3 worker(s) | 1502ms | restarts 0
+[ga] gen   90 | best 156/162 (96.3%) | rate 0.0 | 3 worker(s) | 1957ms | restarts 0
+[ga] gen  100 | best 156/162 (96.3%) | rate 0.0 | 5 worker(s) | 2329ms | restarts 0
+[ga] gen  110 | best 156/162 (96.3%) | rate 0.0 | 5 worker(s) | 2330ms | restarts 0
+[ga] gen  120 | best 156/162 (96.3%) | rate 0.0 | 3 worker(s) | 2995ms | restarts 0
+[ga] DONE. best 156/162 (96.3%) in 301.8s -> /results/result.json
+  saved -> results/result_workers_5.json
+
+==========================================
+  RUN: 6 fitness worker(s)
+==========================================
+  started 6 worker container(s); waiting for health...
+  >>> workers actually running: 6  (should be 6)
+[ga] puzzle = classic (30 givens)
+5 3 . | . 7 . | . . .
+6 . . | 1 9 5 | . . .
+. 9 8 | . . . | . 6 .
+---------------------
+8 . . | . 6 . | . . 3
+4 . . | 8 . 3 | . . 1
+7 . . | . 2 . | . . 6
+---------------------
+. 6 . | . . . | 2 8 .
+. . . | 4 1 9 | . . 5
+. . . | . 8 . | . 7 9
+[ga] config: {"CROSSOVER_RATE": 0.85, "ELITE_COUNT": 6, "HYPERMUTATION_FACTOR": 10, "MAX_GENERATIONS": 120, "MUTATION_RATE": 0.25, "POP_SIZE": 400, "PUZZLE": "classic", "PUZZLE_PATH": "/results/puzzle.json", "RATE_WINDOW": 5, "RESULT_PATH": "/results/result.json", "SEED": 7, "STAGNATION_FOR_HYPERMUT": 25, "STAGNATION_FOR_RESTART": 80, "STAGNATION_THRESHOLD": 0.2, "STATUS_PATH": "/results/status.json", "TOURNAMENT_K": 5}
+[ga] COMPACT chromosome length = 51 (full grid would be 81)
+[ga] waiting for fitness pool...
+[ga] fitness pool is up.
+[ga] gen    1 | best 130/162 (80.25%) | rate None | 3 worker(s) | 2269ms | restarts 0
+[ga] gen   10 | best 146/162 (90.12%) | rate 1.6 | 3 worker(s) | 3643ms | restarts 0
+[ga] gen   20 | best 153/162 (94.44%) | rate 0.0 | 4 worker(s) | 2193ms | restarts 0
+[ga] gen   30 | best 155/162 (95.68%) | rate 0.0 | 5 worker(s) | 1788ms | restarts 0
+[ga] gen   40 | best 155/162 (95.68%) | rate 0.0 | 4 worker(s) | 2313ms | restarts 0
+[ga] gen   50 | best 156/162 (96.3%) | rate 0.0 | 4 worker(s) | 2439ms | restarts 0
+[ga] gen   60 | best 156/162 (96.3%) | rate 0.0 | 4 worker(s) | 2807ms | restarts 0
+[ga] gen   70 | best 156/162 (96.3%) | rate 0.0 | 3 worker(s) | 2337ms | restarts 0
+[ga] gen   80 | best 156/162 (96.3%) | rate 0.0 | 4 worker(s) | 2772ms | restarts 0
+[ga] gen   90 | best 156/162 (96.3%) | rate 0.0 | 5 worker(s) | 2511ms | restarts 0
+[ga] gen  100 | best 156/162 (96.3%) | rate 0.0 | 4 worker(s) | 3077ms | restarts 0
+[ga] gen  110 | best 156/162 (96.3%) | rate 0.0 | 4 worker(s) | 2530ms | restarts 0
+[ga] gen  120 | best 156/162 (96.3%) | rate 0.0 | 4 worker(s) | 2691ms | restarts 0
+[ga] DONE. best 156/162 (96.3%) in 292.0s -> /results/result.json
+  saved -> results/result_workers_6.json
+
+=== All runs complete. Analysing... ===
+
+==============================================================================
+  HYPOTHESIS COMPARISON — Sudoku — single island, scaling the fitness pool
+==============================================================================
+workers |   best | percent | 1st-best gen |  total s | avg gen ms
+------------------------------------------------------------------------------
+      1 |    156 |   96.3% |           41 |   744.86 |    6198.64
+      2 |    156 |   96.3% |           41 |    564.8 |    4698.03   (+24% time vs prev)
+      3 |    156 |   96.3% |           41 |   496.52 |    4129.06   (+12% time vs prev)
+      4 |    156 |   96.3% |           41 |   357.65 |    2971.87   (+28% time vs prev)
+      5 |    156 |   96.3% |           41 |   301.83 |    2506.67   (+16% time vs prev)
+      6 |    156 |   96.3% |           41 |   292.04 |    2425.12   (+3% time vs prev)
+------------------------------------------------------------------------------
+
+Reading the table:
+  * 'best' / 'percent'   = solution QUALITY
+  * '1st-best gen'        = convergence SPEED (lower = faster)
+  * 'total s'             = wall-clock cost
+  * The CROSSOVER POINT is where extra workers stop cutting
+    'total s' meaningfully — that's where pool overhead wins.
+

@@ -37,8 +37,13 @@ if [ -z "$FIT_IMG" ] || [ -z "$GA_IMG" ]; then
 fi
 
 docker network create "$NET" 2>/dev/null || true
-cleanup_workers() { docker ps -aq --filter "label=ga.exp=worker" | xargs -r docker rm -f >/dev/null 2>&1 || true; }
-
+cleanup_workers() {
+  docker ps -aq --filter "label=ga.exp=worker" | xargs -r docker rm -f >/dev/null 2>&1 || true
+  docker ps -aq --filter "label=ga.role=dynamic-fitness-worker" | xargs -r docker rm -f >/dev/null 2>&1 || true
+  docker compose down --remove-orphans >/dev/null 2>&1 || true
+  docker ps -aq --filter "name=fitness" | xargs -r docker rm -f >/dev/null 2>&1 || true
+  docker network create "$NET" 2>/dev/null || true
+}
 for N in $WORKER_COUNTS; do
   echo ""
   echo "=========================================="
